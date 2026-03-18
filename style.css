@@ -1,0 +1,71 @@
+body{
+    font-family: "Calibri";
+
+}
+
+p{
+    color: blue;
+    font-weight: bold;
+    text-align: center;
+}
+.p1{
+    font-weight: bold;
+    font-size: 2rem;
+    margin-top: 0;
+}  
+.lorem{
+    margin: auto;
+    width: 300px;
+    height: 100px;
+    border: dashed blue 2px;
+    color: blue;
+    background-color: #d4feff;
+    overflow-y: scroll;
+}
+a{
+    color: green;
+    font-weight: bold;
+    text-decoration: underline;
+}
+table {
+    margin: auto;
+    border:  1px black solid;
+    color: blue;
+    padding: 0;
+    gap: 0;
+    border-collapse: collapse;
+}
+table *{
+    padding: 0;
+    margin: 0;
+    font-size: 1.2rem;
+     border: 1px solid black;
+}
+table td{
+ text-align: center;  
+ padding:0.8rem;
+}
+
+.line{
+    background-color: lightblue;
+}
+.one{
+    color: blue;
+}
+.two{
+    color: red;
+    font-weight: bold;
+}
+.three{
+    color: red;
+    font-weight: normal;
+}
+.four{
+    color: rgb(168, 168, 76);
+}
+ul{
+  list-style: circle;  
+}
+ul li{
+    color: blue;
+}
