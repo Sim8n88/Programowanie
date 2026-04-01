@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function dzNaHex(n) {
+    if (n === 0) {
+        console.log("0");
+        return;
+    }
+    const znaki = "0123456789ABCDEF";
+    let w = "";
+    let x = Math.floor(Math.abs(n));
+
+    while (x > 0) {
+        w = znaki[x % 16] + w;
+        x = Math.floor(x / 16);
+    }
+
+    if (n < 0) w = "-" + w;
+
+    console.log(w);
+}
+dzNaHex(12)
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+  function oblicz(n) {
+    let suma = 0;
+    let znak = 1;
+
+    for (let i = 0; i < n; i++) {
+        let mianownik = 2 * i + 1; 
+        suma += znak * (1 / mianownik);
+        znak *= -1; 
+    }
+    let y = 4 * suma;
+    console.log(y);
+    return y;
+}
+oblicz(10);
+    </script>
+</body>
+</html>
