@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Rejestracja</title>
+</head>
+<body>
+<form>
+  <label>Podaj nazwę użytkownika:</label>
+  <input type="text" id="nazwa">
+
+  <label>Podaj email:</label>
+  <input type="email" id="email">
+
+  <label>Podaj hasło:</label>
+  <input type="password" id="haslo">
+
+  <label>Podaj hasło ponownie:</label>
+  <input type="password" id="haslo2">
+
+  <label>Podaj datę:</label>
+  <input type="date" id="data">
+
+  <label>Wybierz płeć:</label>
+  <select id="plec">
+    <option>Mężczyzna</option>
+    <option>Kobieta</option>
+    <option>Nie chcę podawać</option>
+  </select>
+
+  <br><br>
+
+  <input type="checkbox" id="regulamin">Zaakceptuj regulamin
+
+  <p>Wersja:</p>
+  <input type="radio" name="wersja" id="darmowa">Wersja darmowa<br>
+  <input type="radio" name="wersja" id="standardowa">Wersja standardowa<br>
+  <input type="radio" name="wersja" id="premium">Wersja premium<br><br>
+
+  <button type="submit">Zarejestruj się</button>
+  <button type="reset">Wyczyść</button>
+</form>
+
+<div id="wynik"></div>
+
+<script>
+const nazwa = document.getElementById("nazwa");
+const email = document.getElementById("email");
+const haslo = document.getElementById("haslo");
+const haslo2 = document.getElementById("haslo2");
+const data = document.getElementById("data");
+const plec = document.getElementById("plec");
+const regulamin = document.getElementById("regulamin");
+const darmowa = document.getElementById("darmowa");
+const standardowa = document.getElementById("standardowa");
+const premium = document.getElementById("premium");
+const formularz = document.querySelector("form");
+const wynik = document.getElementById("wynik");
+
+formularz.addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let bledy = [];
+
+  let nazwaU = nazwa.value;
+  let mailU = email.value;
+  let hasloU = haslo.value;
+  let hasloU2 = haslo2.value;
+  let dataU = data.value;
+
+  let wersja = "";
+
+  if(darmowa.checked){
+    wersja = "Wersja darmowa";
+  }
+  if(standardowa.checked){
+    wersja = "Wersja standardowa";
+  }
+  if(premium.checked){
+    wersja = "Wersja premium";
+  }
+
+  if(nazwaU == "" || mailU == "" || hasloU == "" || hasloU2 == "" || dataU == "" || wersja == ""){
+    bledy.push("Wszystkie pola muszą być wypełnione");
+  }
+
+  if(/^[a-zA-Z0-9]+$/.test(nazwaU) == false){
+    bledy.push("Zła nazwa użytkownika");
+  }
+
+  if(hasloU.length < 8 || /\d/.test(hasloU) == false){
+    bledy.push("Hasło za słabe");
+  }
+
+  if(hasloU != hasloU2){
+    bledy.push("Hasła różne");
+  }
+
+  if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mailU) == false){
+    bledy.push("Zły email");
+  }
+
+  if(regulamin.checked == false){
+    bledy.push("Akceptuj regulamin");
+  }
+
+  let dzis = new Date();
+  let ur = new Date(dataU);
+  let wiek = dzis.getFullYear() - ur.getFullYear();
+
+  if(wiek < 18){
+    bledy.push("Nie masz 18 lat");
+  }
+
+  if(bledy.length > 0){
+    wynik.innerHTML = bledy.join("<br>");
+    return;
+  }
+
+  let d = ur.getDate();
+  let m = ur.getMonth() + 1;
+  let r = ur.getFullYear();
+
+  if(d < 10) d = "0" + d;
+  if(m < 10) m = "0" + m;
+
+  let dataFormat = d + "." + m + "." + r;
+
+  let gwiazdki = "";
+  for(let i=0;i<hasloU.length;i++){
+    gwiazdki += "*";
+  }
+
+  wynik.innerHTML =
+    "Nazwa użytkownika: " + nazwaU + "<br>" +
+    "Hasło: " + gwiazdki + "<br>" +
+    "Adres e-mail: " + mailU + "<br>" +
+    "Data urodzenia: " + dataFormat + "<br>" +
+    "Płeć: " + plec.value + "<br>" +
+    "Wybrana wersja: " + wersja;
+});
+</script>
+</body>
+</html>

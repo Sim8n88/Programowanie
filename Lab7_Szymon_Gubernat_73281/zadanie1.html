@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <h2>Wykonaj dzielenie dwóch liczb</h2>
+      <input type="number" id="number1" />
+      <input type="number" id="number2" />
+      <input type="submit" id="submit" value="Oblicz dzielenie" />
+      <p id="wynik"></p>
+    </form>
+    <script>
+      let n1=document.querySelector('#number1')
+      let n2=document.querySelector('#number2')
+      let submit=document.querySelector('#submit')
+      let wynik=document.querySelector('#wynik')
+      function dziel(e){
+          e.preventDefault()
+          try{
+              let n1Value=parseFloat(n1.value)
+              let n2Value=parseFloat(n2.value)
+          if (n2Value===0){
+              throw new Error("Nie można dzielić przez zero")
+              
+          }
+          if (isNaN(n1Value) || isNaN(n2Value)){
+              throw new Error("Podaj poprawne liczby")
+          }
+          let dzielenie=n1Value/n2Value
+          wynik.innerHTML=dzielenie
+        }catch(error){
+            wynik.innerHTML=error.message
+        }
+      }
+      submit.addEventListener('click',dziel)
+    </script>
+  </body>
+</html>
