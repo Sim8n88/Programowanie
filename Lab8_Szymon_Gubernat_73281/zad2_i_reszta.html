@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //zad2
+      class ComplexNumber {
+        constructor(real, imaginary) {
+          this.real = real;
+          this.imaginary = imaginary;
+        }
+        wypisz() {
+          if (this.imaginary >= 0) {
+            return `${this.real} + ${this.imaginary}i`;
+          } else {
+            return `${this.real} - ${Math.abs(this.imaginary)}i`;
+          }
+        }
+        module() {
+          return Math.sqrt(this.real ** 2 + this.imaginary ** 2);
+        }
+      }
+      const liczba = new ComplexNumber(6, -7);
+      console.log(liczba.wypisz());
+      console.log(liczba.module());
+      //zad3
+      function zad3(a) {
+        tab = [];
+        for (let i = 0; i < a; i++) {
+          const real = Math.floor(Math.random() * 100);
+          const imaginary = Math.floor(Math.random() * 100);
+          tab.push(new ComplexNumber(real, imaginary));
+        }
+        return tab;
+      }
+      console.log(zad3(10));
+      //zad 4
+      const tablica = zad3(10);
+      const dodatnie = tablica.filter((el) => el.real > 0 && el.imaginary > 0);
+      console.log("Dodatnie:");
+      for (el of dodatnie) {
+        console.log(el);
+      }
+      //zad 5
+      const zamienione = tablica.map(
+        (el) => new ComplexNumber(el.imaginary, el.real),
+      );
+      console.log("Zamiana:");
+      for (el of zamienione) {
+        console.log(el);
+      }
+      //zad6
+      const sumaModulow = tablica.reduce((suma, el) => suma + el.module(), 0);
+      console.log("Suma modułów:");
+      console.log(sumaModulow);
+      //zad 7
+      const minModul = tablica.reduce((min, el) => {
+        const mod = el.module();
+        if (mod < min) {
+          return mod;
+        } else {
+          return min;
+        }
+      }, tablica[0].module());
+      console.log("Najmniejszy moduł:", minModul);
+      //zad8
+      const maxZespolona = tablica.reduce((max, el) => {
+        if (el.module() > max.module()) {
+          return el;
+        } else {
+          return max;
+        }
+      });
+      console.log("Największa liczba zespolona:");
+      console.log(maxZespolona.wypisz());
+    </script>
+  </body>
+</html>
