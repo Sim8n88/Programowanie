@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Clicker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>Minecraft Clicker</header>
+    <main>
+        <p id="punkty">0</p>
+        <section class="buttons">
+        <button id="zbieraj">Klikaj aby zebrać punkty</button>
+        <button id="drewniany">Kup drewniany kilof (+1/s) Koszt 50</button>
+        <button id="zelazny">Kup żelazny kilof (+20 klik) Koszt 100</button>
+        <button id="diamentowy">Kup diamentowy kilof (+30 klik) Koszt 300</button></section>
+    </main>
+    <footer>&copy Szymon Gubernat 73281</footer>
+    <script>
+        let punkty = document.querySelector('#punkty')
+        let zbieraj = document.querySelector('#zbieraj')
+        let drewniany = document.querySelector('#drewniany')
+        let zelazny = document.querySelector('#zelazny')
+        let diamentowy = document.querySelector('#diamentowy')
+        let licznik = parseInt(localStorage.getItem('licznik')) || 0
+        let klikPower = parseInt(localStorage.getItem('klikPower')) || 1
+        let maDrewniany = localStorage.getItem('maDrewniany') === 'true'
+        let maZelazny = localStorage.getItem('maZelazny') === 'true'
+        let maDiamentowy = localStorage.getItem('maDiamentowy') === 'true'
+        function update() {
+            punkty.innerHTML = licznik
+            save()
+        }
+        function save() {
+            localStorage.setItem('licznik', licznik)
+            localStorage.setItem('klikPower', klikPower)
+            localStorage.setItem('maDrewniany', maDrewniany)
+            localStorage.setItem('maZelazny', maZelazny)
+            localStorage.setItem('maDiamentowy', maDiamentowy)
+        }
+        zbieraj.addEventListener('click', () => {
+            licznik += klikPower
+            update()
+        })
+     drewniany.addEventListener('click', () => {
+            if (licznik >= 50 && !maDrewniany) {
+                maDrewniany = true
+
+                setInterval(() => {
+                    licznik += 1
+                    update()
+                }, 1000)
+
+                update()
+            } else {
+                alert("Nie możesz tego kupić")
+            }
+        })
+        zelazny.addEventListener('click', () => {
+            if (licznik >= 100 && !maZelazny) {
+                maZelazny = true
+                klikPower += 20
+                update()
+            } else {
+                alert("Nie możesz tego kupić")
+            }
+        })
+      diamentowy.addEventListener('click', () => {
+            if (licznik >= 300 && !maDiamentowy) {
+                maDiamentowy = true
+                klikPower += 30
+                update()
+            } else {
+                alert("Nie możesz tego kupić")
+            }
+        })
+        if (maDrewniany) {
+            setInterval(() => {
+                licznik += 1
+                update()
+            }, 1000)
+        }
+        update()
+    </script>
+</body>
+</html>
